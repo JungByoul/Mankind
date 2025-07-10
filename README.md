@@ -85,18 +85,39 @@ PDF 약관을 업로드하면 주요 투자 조건을 자동으로 추출·검�
 ---
 
 ## 📂 폴더 구조
+<details> <summary><b>📦 frontend</b></summary>
 /frontend
-├─ /src
-│ ├─ /apis # Axios instance & API 함수
-│ ├─ /components # 전역 UI 컴포넌트(Spinner, Alert, Sidebar 등)
-│ ├─ /pages
-│ │ ├─ StartPage # PDF 업로드
-│ │ ├─ VerifyPage # 추출값 확인 & 수정
-│ │ └─ Dashboard # 지수, 수익구조, 상환시나리오
-│ ├─ /utils # savedFile, validation, format 등
-│ ├─ /hooks # useVerifyData, usePostFile 등
-│ ├─ /typings # TypeScript 인터페이스/타입
-│ └─ index.tsx / App.tsx
-├─ tsconfig.json
-└─ vite.config.ts
-
+├── /src
+│   ├── /apis         # Axios instance & API 함수
+│   ├── /components   # 전역 UI 컴포넌트 (Spinner, Alert, Sidebar 등)
+│   ├── /pages
+│   │   ├── StartPage     # PDF 업로드
+│   │   └── VerifyPage    # 추출값 확인 & 수정
+│   │       └── Dashboard # 지수, 수익구조, 상황시나리오
+│   ├── /utils        # savedFile, validation, format 등
+│   ├── /hooks        # useVerifyData, usePostFile 등
+│   ├── /typings      # TypeScript 인터페이스/타입
+│   └── index.tsx / App.tsx
+├── tsconfig.json
+└── vite.config.ts
+</details> <details> <summary><b>📦 backend</b></summary>
+/backend
+├── /app
+│   ├── /api                 # 라우터 모음
+│   │   └── endpoints.py     # /extract, /verify 등 라우터 정의
+│   ├── /services
+│   │   ├── pdf_extractor.py # PDF 텍스트 추출 및 전처리
+│   │   └── verifier.py      # 수치 검증, 정합성 분석
+│   ├── /models              # Pydantic 스키마 정의
+│   │   └── extract_schema.py
+│   ├── /core
+│   │   └── config.py        # 환경변수 로딩 등 설정
+│   ├── /utils
+│   │   └── file_utils.py    # 파일 저장/이름 포맷 등 유틸
+│   └── main.py              # FastAPI 엔트리포인트
+├── /tests                   # 유닛 테스트 코드
+│   └── test_pdf.py
+├── requirements.txt
+├── .env
+└── README.md
+</details>
