@@ -5,40 +5,42 @@
 Hi-Finance는 금융 파생상품 투자 시나리오를 빠르고 직관적으로 확인할 수 있는 웹 애플리케이션입니다.  
 PDF 약관을 업로드하면 주요 투자 조건을 자동으로 추출·검증하고, 대시보드에서 핵심 지표와 수익/상환 시나리오를 시각화합니다.
 
-![Hi-Finance 스크린샷](./docs/screenshot.png)
+![image](https://github.com/user-attachments/assets/992ae447-8391-47ca-ac5c-920cd4794c2f)
 
 ---
-✍️ 내가 맡은 주요 작업
-PDF 업로드 UI/UX (UploadBox, ConfirmButton, React Query 연동)
+## ✍️ 각자 역할 및 핵심 수행 작업
 
-VerifyPage 컴포넌트
+**🌟 정별**
 
-InfoRow, SectionHeader, EditConfirmButtons 등 재사용 컴포넌트 작성
+## 1. Front-end
+   **1-1 Dashboard 차트 구현**
+      - 수익구조 분석 차트(RevenueStructure): 1~5차 조기상환 수익률 LineChart
 
-읽기/편집 모드 전환, 유효성 검사, localStorage 저장 로직 구현
+      - 만기 상환 시나리오(RepaymentScenario): 조기상환 조건 및 수익률 vs. 만기상환 시나리오 비교 LineChart
 
-Dashboard
+      - Modal(확대 보기), 툴팁·범례 커스터마이징 및 Tailwind 기반 레이아웃 최적화
 
-IndexChart, RevenueStructure, RepaymentScenario 차트 구현 (Recharts)
+      - 데이터 흐르 및 상태 관리: 차트 컴포넌트 내부에서 getFileValue() 호출해 최신 파싱값을 기반으로 entries 배열 생성
 
-Modal 확대 보기, 툴팁/범례 커스터마이징
+   **1-2 Verify Page 구현**
+      - SectionHeader, InfoRow, EditButton 등 재사용 가능한 컴포넌트 개발
 
-Tailwind CSS 그리드 레이아웃 & 반응형 min-width 조정
+      - 읽기/편집 모드 전환, 유효성 검사(숫자·날짜·빈값) 및 수정(에러 처리) 로직 구현
 
-TypeScript 타입 정의 (types.ts, InputProps, PdfValue, RoundKey 등)
+      - 데이터 흐름 및 상태관리: getFileValue() 로 저장된 파싱값 불러오기 → InfoRow 컴포넌트로 렌더링 및 수정
+         ->수정 완료 시 setFileValue(editedData) → 다시 로컬스토리지에 저장 → navigate('/dashboard')
 
-유틸 함수
-
-savedFile (localStorage 읽기/쓰기)
-
-validationCheck (숫자/날짜 검사)
-
-format (날짜 포매팅)
-
-배포 설정: Vercel + monorepo 구조 (frontend 전용)
+      - 페이지 전체 UI 구성
 
 
 
+   ## 2. 데이터 전처리·분석 (Python)
+
+      - 신한투자증권 파생상품 투자설명서(PDF): 주요 투자 조건 추출을 위한 파이썬 스크립트 작성
+
+      - 기준값(낙인구간, 자동조기상환 조건, 수익률 등) 수립 로직 구현
+
+      - 판다스(Pandas) 기반 전처리 파이프라인 설계 및 테스트 데이터 생성
 
 ---
 
